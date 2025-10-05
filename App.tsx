@@ -14,6 +14,7 @@ import TasksScreen from './screens/TasksScreen';
 import ApiScreen from './screens/ApiScreen';
 import AuthDemoScreen from './screens/AuthDemoScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import ComponentDemoScreen from './screens/ComponentDemoScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -127,6 +128,16 @@ export default function App() {
                   tabBarLabel: 'Profile',
                   tabBarIcon: ({ color }) => (
                     <TabIcon emoji="👤" color={color} />
+                  ),
+                }}
+              />
+              <Tab.Screen
+                name="Components"
+                component={ComponentDemoScreen}
+                options={{
+                  tabBarLabel: 'Components',
+                  tabBarIcon: ({ color }) => (
+                    <TabIcon emoji="🧩" color={color} />
                   ),
                 }}
               />
