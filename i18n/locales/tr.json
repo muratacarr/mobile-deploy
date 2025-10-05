@@ -113,5 +113,13 @@
         "notFound": "Kaynak bulunamadı.",
         "unknown": "Beklenmeyen bir hata oluştu.",
         "validation": "Doğrulama hatası. Lütfen girişinizi kontrol edin."
+    },
+    "noNetwork": {
+        "title": "İnternet Bağlantısı Yok",
+        "message": "Uygulamayı kullanabilmek için internet bağlantısı gereklidir. Lütfen Wi-Fi veya mobil veri bağlantınızı kontrol edin.",
+        "retry": "Tekrar Dene",
+        "connected": "Bağlandı",
+        "disconnected": "Bağlantı Yok",
+        "tip": "Bağlantı kurulduğunda otomatik olarak devam edeceksiniz"
     }
 }

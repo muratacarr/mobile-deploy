@@ -113,5 +113,13 @@
         "notFound": "Resource not found.",
         "unknown": "An unexpected error occurred.",
         "validation": "Validation error. Please check your input."
+    },
+    "noNetwork": {
+        "title": "No Internet Connection",
+        "message": "Internet connection is required to use the app. Please check your Wi-Fi or mobile data connection.",
+        "retry": "Retry",
+        "connected": "Connected",
+        "disconnected": "Disconnected",
+        "tip": "You will automatically continue when connection is restored"
     }
 }
