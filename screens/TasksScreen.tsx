@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useState } from 'react';
 import { useTaskStore } from '../store/useTaskStore';
+import { Button, Input, Card } from '../components/ui';
 
 export default function TasksScreen() {
     const { tasks, addTask, removeTask, toggleTask, clearCompleted } = useTaskStore();
@@ -28,22 +29,23 @@ export default function TasksScreen() {
                 </Text>
             </View>
 
-            <View style={styles.inputCard}>
-                <TextInput
-                    style={styles.input}
+            <Card variant="elevated" padding="lg" margin="md">
+                <Input
                     placeholder="Enter new task..."
-                    placeholderTextColor="#64748b"
                     value={newTaskText}
                     onChangeText={setNewTaskText}
                     onSubmitEditing={handleAddTask}
+                    variant="outlined"
+                    size="md"
                 />
-                <TouchableOpacity
-                    style={styles.addButton}
+                <Button
+                    title="+ Add Task"
                     onPress={handleAddTask}
-                >
-                    <Text style={styles.addButtonText}>+ Add</Text>
-                </TouchableOpacity>
-            </View>
+                    variant="primary"
+                    size="md"
+                    fullWidth
+                />
+            </Card>
 
             {tasks.length > 0 && completedCount > 0 && (
                 <TouchableOpacity

@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useCounterStore } from '../store/useCounterStore';
+import { Button, Card } from '../components/ui';
 
 export default function HomeScreen() {
-  const { t } = useTranslation();
-  const { count, increment, decrement, reset } = useCounterStore();
+    const { t } = useTranslation();
+    const { count, increment, decrement, reset } = useCounterStore();
 
     return (
         <View style={styles.container}>
@@ -14,43 +15,46 @@ export default function HomeScreen() {
                 <Text style={styles.subtitle}>{t('home.subtitle')}</Text>
             </View>
 
-            <View style={styles.card}>
+            <Card variant="elevated" padding="lg" margin="md">
                 <Text style={styles.cardTitle}>{t('home.counterDemo')}</Text>
                 <View style={styles.counterContainer}>
-                    <TouchableOpacity
-                        style={styles.button}
+                    <Button
+                        title="−"
                         onPress={decrement}
-                    >
-                        <Text style={styles.buttonText}>−</Text>
-                    </TouchableOpacity>
+                        variant="outline"
+                        size="lg"
+                        style={styles.counterButton}
+                    />
 
                     <View style={styles.countDisplay}>
                         <Text style={styles.countText}>{count}</Text>
                     </View>
 
-                    <TouchableOpacity
-                        style={styles.button}
+                    <Button
+                        title="+"
                         onPress={increment}
-                    >
-                        <Text style={styles.buttonText}>+</Text>
-                    </TouchableOpacity>
+                        variant="outline"
+                        size="lg"
+                        style={styles.counterButton}
+                    />
                 </View>
 
-                <TouchableOpacity
-                    style={styles.resetButton}
+                <Button
+                    title={t('home.resetCounter')}
                     onPress={reset}
-                >
-                    <Text style={styles.resetButtonText}>{t('home.resetCounter')}</Text>
-                </TouchableOpacity>
-            </View>
+                    variant="secondary"
+                    size="md"
+                    fullWidth
+                />
+            </Card>
 
-            <View style={styles.infoCard}>
+            <Card variant="outlined" padding="lg" margin="md">
                 <Text style={styles.infoTitle}>✨ {t('home.features')}</Text>
                 <Text style={styles.infoText}>• {t('home.featureList.zustand')}</Text>
                 <Text style={styles.infoText}>• {t('home.featureList.asyncStorage')}</Text>
                 <Text style={styles.infoText}>• {t('home.featureList.interactiveCounter')}</Text>
                 <Text style={styles.infoText}>• {t('home.featureList.modernUI')}</Text>
-            </View>
+            </Card>
         </View>
     );
 }
@@ -104,23 +108,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 16,
     },
-    button: {
-        backgroundColor: '#3b82f6',
+    counterButton: {
         width: 60,
         height: 60,
         borderRadius: 30,
-        alignItems: 'center',
-        justifyContent: 'center',
-        shadowColor: '#3b82f6',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 8,
-        elevation: 5,
-    },
-    buttonText: {
-        fontSize: 32,
-        color: '#ffffff',
-        fontWeight: 'bold',
     },
     countDisplay: {
         backgroundColor: '#334155',
@@ -136,17 +127,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#ffffff',
     },
-    resetButton: {
-        backgroundColor: '#475569',
-        paddingVertical: 12,
-        borderRadius: 8,
-        alignItems: 'center',
-    },
-    resetButtonText: {
-        color: '#ffffff',
-        fontSize: 16,
-        fontWeight: '600',
-    },
+    // Reset button styles are now handled by the Button component
     infoCard: {
         backgroundColor: '#1e293b',
         borderRadius: 16,

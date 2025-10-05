@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useCounterStore } from '../store/useCounterStore';
 import { useTaskStore } from '../store/useTaskStore';
@@ -7,6 +7,7 @@ import { ENV, isDevelopment } from '../config/env';
 import { versionManager } from '../config/version';
 import { configManager } from '../config/appConfig';
 import LanguageSwitcher from '../components/LanguageSwitcher';
+import { Button, Card } from '../components/ui';
 
 export default function ProfileScreen() {
     const { t } = useTranslation();
@@ -177,12 +178,13 @@ export default function ProfileScreen() {
                 <LanguageSwitcher />
             </View>
 
-            <TouchableOpacity
-                style={styles.resetButton}
+            <Button
+                title={`🔄 ${t('profile.resetAll')}`}
                 onPress={handleResetAll}
-            >
-                <Text style={styles.resetButtonText}>🔄 {t('profile.resetAll')}</Text>
-            </TouchableOpacity>
+                variant="danger"
+                size="lg"
+                fullWidth
+            />
 
             <View style={styles.footer}>
                 <Text style={styles.footerText}>Made with ❤️ using Expo</Text>
