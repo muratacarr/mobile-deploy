@@ -1,19 +1,21 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { useCounterStore } from '../store/useCounterStore';
 
 export default function HomeScreen() {
-    const { count, increment, decrement, reset } = useCounterStore();
+  const { t } = useTranslation();
+  const { count, increment, decrement, reset } = useCounterStore();
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.emoji}>🏠</Text>
-                <Text style={styles.title}>Home Screen</Text>
-                <Text style={styles.subtitle}>Counter with Zustand & AsyncStorage</Text>
+                <Text style={styles.title}>{t('home.title')}</Text>
+                <Text style={styles.subtitle}>{t('home.subtitle')}</Text>
             </View>
 
             <View style={styles.card}>
-                <Text style={styles.cardTitle}>Counter Demo</Text>
+                <Text style={styles.cardTitle}>{t('home.counterDemo')}</Text>
                 <View style={styles.counterContainer}>
                     <TouchableOpacity
                         style={styles.button}
@@ -38,17 +40,16 @@ export default function HomeScreen() {
                     style={styles.resetButton}
                     onPress={reset}
                 >
-                    <Text style={styles.resetButtonText}>Reset Counter</Text>
+                    <Text style={styles.resetButtonText}>{t('home.resetCounter')}</Text>
                 </TouchableOpacity>
             </View>
 
             <View style={styles.infoCard}>
-                <Text style={styles.infoTitle}>✨ Features</Text>
-                <Text style={styles.infoText}>• Zustand State Management</Text>
-                <Text style={styles.infoText}>• AsyncStorage Persistence</Text>
-                <Text style={styles.infoText}>• React Navigation</Text>
-                <Text style={styles.infoText}>• TypeScript Support</Text>
-                <Text style={styles.infoText}>• Modern UI Design</Text>
+                <Text style={styles.infoTitle}>✨ {t('home.features')}</Text>
+                <Text style={styles.infoText}>• {t('home.featureList.zustand')}</Text>
+                <Text style={styles.infoText}>• {t('home.featureList.asyncStorage')}</Text>
+                <Text style={styles.infoText}>• {t('home.featureList.interactiveCounter')}</Text>
+                <Text style={styles.infoText}>• {t('home.featureList.modernUI')}</Text>
             </View>
         </View>
     );

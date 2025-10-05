@@ -1,12 +1,15 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { useCounterStore } from '../store/useCounterStore';
 import { useTaskStore } from '../store/useTaskStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { ENV, isDevelopment } from '../config/env';
 import { versionManager } from '../config/version';
 import { configManager } from '../config/appConfig';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 export default function ProfileScreen() {
+    const { t } = useTranslation();
     const { count, reset: resetCounter } = useCounterStore();
     const { tasks, clearCompleted } = useTaskStore();
     const { isAuthenticated, user } = useAuthStore();
@@ -19,17 +22,17 @@ export default function ProfileScreen() {
 
     const handleResetAll = () => {
         Alert.alert(
-            'Reset All Data',
-            'Are you sure you want to reset all data? This action cannot be undone.',
+            t('profile.resetConfirm'),
+            t('profile.resetMessage'),
             [
-                { text: 'Cancel', style: 'cancel' },
+                { text: t('common.cancel'), style: 'cancel' },
                 {
-                    text: 'Reset',
+                    text: t('common.delete'),
                     style: 'destructive',
                     onPress: () => {
                         resetCounter();
                         clearCompleted();
-                        Alert.alert('Success', 'All data has been reset');
+                        Alert.alert(t('common.success'), t('profile.resetSuccess'));
                     }
                 },
             ]
@@ -40,46 +43,46 @@ export default function ProfileScreen() {
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
             <View style={styles.header}>
                 <Text style={styles.emoji}>👤</Text>
-                <Text style={styles.title}>Profile</Text>
-                <Text style={styles.subtitle}>Your app statistics</Text>
+                <Text style={styles.title}>{t('profile.title')}</Text>
+                <Text style={styles.subtitle}>{t('profile.subtitle')}</Text>
             </View>
 
             <View style={styles.card}>
-                <Text style={styles.cardTitle}>📊 Statistics</Text>
+                <Text style={styles.cardTitle}>📊 {t('profile.statistics')}</Text>
 
                 <View style={styles.statRow}>
                     <View style={styles.statItem}>
                         <Text style={styles.statValue}>{count}</Text>
-                        <Text style={styles.statLabel}>Counter Value</Text>
+                        <Text style={styles.statLabel}>{t('profile.counter')}</Text>
                     </View>
                     <View style={styles.statDivider} />
                     <View style={styles.statItem}>
                         <Text style={styles.statValue}>{tasks.length}</Text>
-                        <Text style={styles.statLabel}>Total Tasks</Text>
+                        <Text style={styles.statLabel}>{t('tasks.total')}</Text>
                     </View>
                 </View>
 
                 <View style={styles.statRow}>
                     <View style={styles.statItem}>
                         <Text style={[styles.statValue, { color: '#10b981' }]}>{activeTasks}</Text>
-                        <Text style={styles.statLabel}>Active Tasks</Text>
+                        <Text style={styles.statLabel}>{t('profile.activeTasks')}</Text>
                     </View>
                     <View style={styles.statDivider} />
                     <View style={styles.statItem}>
                         <Text style={[styles.statValue, { color: '#64748b' }]}>{completedTasks}</Text>
-                        <Text style={styles.statLabel}>Completed</Text>
+                        <Text style={styles.statLabel}>{t('profile.completedTasks')}</Text>
                     </View>
                 </View>
             </View>
 
             <View style={styles.card}>
-                <Text style={styles.cardTitle}>🔐 Authentication</Text>
+                <Text style={styles.cardTitle}>🔐 {t('profile.authentication')}</Text>
 
                 <View style={styles.settingItem}>
-                    <Text style={styles.settingLabel}>Status</Text>
+                    <Text style={styles.settingLabel}>{t('auth.status')}</Text>
                     <View style={[styles.badge, isAuthenticated ? styles.authenticatedBadge : styles.unauthenticatedBadge]}>
                         <Text style={styles.badgeText}>
-                            {isAuthenticated ? '✓ Authenticated' : '✗ Not Authenticated'}
+                            {isAuthenticated ? `✓ ${t('auth.authenticated')}` : `✗ ${t('auth.notAuthenticated')}`}
                         </Text>
                     </View>
                 </View>
@@ -169,11 +172,16 @@ export default function ProfileScreen() {
                 <Text style={styles.techText}>• Environment Variables (.env)</Text>
             </View>
 
+            <View style={styles.card}>
+                <Text style={styles.cardTitle}>🌍 {t('profile.language')}</Text>
+                <LanguageSwitcher />
+            </View>
+
             <TouchableOpacity
                 style={styles.resetButton}
                 onPress={handleResetAll}
             >
-                <Text style={styles.resetButtonText}>🔄 Reset All Data</Text>
+                <Text style={styles.resetButtonText}>🔄 {t('profile.resetAll')}</Text>
             </TouchableOpacity>
 
             <View style={styles.footer}>

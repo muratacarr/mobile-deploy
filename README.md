@@ -15,6 +15,7 @@ A modern, production-ready React Native mobile application built with Expo, feat
 - 🛡️ **Error Handling** - Comprehensive error handling with interceptors
 - 🔄 **Auto Retry** - Automatic retry with exponential backoff
 - ⏱️ **Timeout Handling** - Request timeout management
+- 🌍 **Internationalization** - i18n support with auto-detection (TR/EN)
 - 📱 **TypeScript** - Full type safety
 - ⚡ **Latest Tech Stack** - Expo 54, React 19, React Native 0.81
 
@@ -29,6 +30,8 @@ A modern, production-ready React Native mobile application built with Expo, feat
 - **React Navigation** ^7.1.18
 - **AsyncStorage** ^2.2.0
 - **Expo SecureStore** ^15.0.7
+- **i18next** ^23.x (Internationalization)
+- **Expo Localization** (Device Language Detection)
 
 ## 📱 Screens
 
@@ -306,12 +309,48 @@ const maxSize = configManager.getConstant("maxFileSize");
 
 See [VERSION_CONTROL.md](./VERSION_CONTROL.md) for detailed documentation.
 
+## 🌍 Internationalization (i18n)
+
+The app supports multiple languages with automatic detection:
+
+### Features
+
+- ✅ **Auto Language Detection** - Detects device language on first launch
+- ✅ **Persistent Preference** - Saves selected language
+- ✅ **JSON-Based Translations** - Easy-to-edit locale files
+- ✅ **Supported Languages** - Turkish (TR) and English (EN)
+- ✅ **Hot Reload** - Language changes apply instantly
+
+### Usage
+
+```typescript
+import { useTranslation } from "react-i18next";
+
+function MyComponent() {
+  const { t } = useTranslation();
+
+  return <Text>{t("home.title")}</Text>;
+}
+```
+
+### Change Language
+
+```typescript
+import { changeLanguage } from "./i18n";
+
+await changeLanguage("tr"); // Switch to Turkish
+await changeLanguage("en"); // Switch to English
+```
+
+See [I18N.md](./I18N.md) for detailed documentation.
+
 ## 📖 Documentation
 
 - [Environment Setup Guide](./ENV_SETUP.md)
 - [Error Handling Guide](./ERROR_HANDLING.md)
 - [Security Guide](./SECURITY.md)
 - [Version Control & Config Guide](./VERSION_CONTROL.md)
+- [Internationalization Guide](./I18N.md)
 
 ## 🎨 Customization
 

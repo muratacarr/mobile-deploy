@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { versionManager } from './config/version';
 import { configManager } from './config/appConfig';
+import './i18n';
 import HomeScreen from './screens/HomeScreen';
 import TasksScreen from './screens/TasksScreen';
 import ApiScreen from './screens/ApiScreen';
