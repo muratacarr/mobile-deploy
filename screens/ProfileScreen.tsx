@@ -3,11 +3,16 @@ import { useCounterStore } from '../store/useCounterStore';
 import { useTaskStore } from '../store/useTaskStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { ENV, isDevelopment } from '../config/env';
+import { versionManager } from '../config/version';
+import { configManager } from '../config/appConfig';
 
 export default function ProfileScreen() {
     const { count, reset: resetCounter } = useCounterStore();
     const { tasks, clearCompleted } = useTaskStore();
     const { isAuthenticated, user } = useAuthStore();
+
+    const version = versionManager.getVersion();
+    const config = configManager.getConfig();
 
     const completedTasks = tasks.filter(t => t.completed).length;
     const activeTasks = tasks.length - completedTasks;
@@ -106,7 +111,19 @@ export default function ProfileScreen() {
 
                 <View style={styles.settingItem}>
                     <Text style={styles.settingLabel}>🔢 Version</Text>
-                    <Text style={styles.settingValue}>{ENV.APP_VERSION}</Text>
+                    <Text style={styles.settingValue}>{versionManager.getVersionString()}</Text>
+                </View>
+
+                <View style={styles.settingItem}>
+                    <Text style={styles.settingLabel}>🏗️ Build</Text>
+                    <Text style={styles.settingValue}>{version.buildNumber}</Text>
+                </View>
+
+                <View style={styles.settingItem}>
+                    <Text style={styles.settingLabel}>📦 Bundle ID</Text>
+                    <Text style={[styles.settingValue, styles.smallText]} numberOfLines={1}>
+                        {version.bundleId}
+                    </Text>
                 </View>
 
                 <View style={styles.settingItem}>
@@ -254,6 +271,7 @@ const styles = StyleSheet.create({
     },
     smallText: {
         fontSize: 11,
+        flexShrink: 1,
     },
     devBadge: {
         backgroundColor: '#10b981',

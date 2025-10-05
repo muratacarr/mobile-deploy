@@ -1,10 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text } from 'react-native';
+import { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { versionManager } from './config/version';
+import { configManager } from './config/appConfig';
 import HomeScreen from './screens/HomeScreen';
 import TasksScreen from './screens/TasksScreen';
 import ApiScreen from './screens/ApiScreen';
@@ -36,6 +39,12 @@ function TabIcon({ emoji, color }: { emoji: string; color: string }) {
 }
 
 export default function App() {
+  useEffect(() => {
+    // Log version and config on app start
+    versionManager.logVersion();
+    configManager.logConfig();
+  }, []);
+
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>

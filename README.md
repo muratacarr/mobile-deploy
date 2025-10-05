@@ -273,6 +273,46 @@ await logout(); // Clears all tokens
 
 See [SECURITY.md](./SECURITY.md) for comprehensive security documentation.
 
+## ⚙️ Version Control & Configuration
+
+This app includes a centralized configuration system:
+
+### Features
+
+- ✅ **Version Manager** - App versioning, build numbers, platform info
+- ✅ **Config Manager** - Centralized app settings and constants
+- ✅ **Feature Flags** - Runtime feature toggles
+- ✅ **API Configuration** - Timeout, retries, base URL
+- ✅ **Cache Settings** - Configurable cache times
+- ✅ **Constants Management** - No magic numbers
+
+### Usage
+
+```typescript
+import { versionManager } from "./config/version";
+import { configManager } from "./config/appConfig";
+
+// Get version info
+const version = versionManager.getVersionString(); // "1.0.0 (123)"
+
+// Check feature flags
+if (configManager.isFeatureEnabled("enableAnalytics")) {
+  trackEvent("page_view");
+}
+
+// Get constants
+const maxSize = configManager.getConstant("maxFileSize");
+```
+
+See [VERSION_CONTROL.md](./VERSION_CONTROL.md) for detailed documentation.
+
+## 📖 Documentation
+
+- [Environment Setup Guide](./ENV_SETUP.md)
+- [Error Handling Guide](./ERROR_HANDLING.md)
+- [Security Guide](./SECURITY.md)
+- [Version Control & Config Guide](./VERSION_CONTROL.md)
+
 ## 🎨 Customization
 
 ### Colors
